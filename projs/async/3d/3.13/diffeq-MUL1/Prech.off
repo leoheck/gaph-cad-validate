@@ -1,0 +1,10 @@
+.i 7
+.o 1
+.ilb EvDone A2M A1M Prech M1A LM1 zzz00
+.ob Prech
+.p 0
+011-0-- 0
+0-0-1-- 0
+0-00100 0
+-100100 0
+.e

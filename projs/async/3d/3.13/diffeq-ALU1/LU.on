@@ -1,0 +1,11 @@
+.i 10
+.o 1
+.ilb start EvDone M1A Prech LB LA LU A1M zzz00 zzz01
+.ob LU
+.p 0
+110-1---10 1
+11-1101110 1
+1-01101110 1
+1-01101110 1
+-101101110 1
+.e

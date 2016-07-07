@@ -1,0 +1,17 @@
+;
+;	FIFO cell control
+;
+;	All signals are active high
+;	Data flows from left to right
+;
+	name	fifocellctrl
+;
+	input	rin	0		; Req from right cell
+	input	ain	0		; Ack from left cell
+
+	output	rout	1		; Req to left cell
+	output	aout	0		; Ack to right cell
+;
+	0	1	rin* ain+	| rout-
+	1	2	rin+ ain-	| aout+
+	2	0	rin-		| rout+ aout-

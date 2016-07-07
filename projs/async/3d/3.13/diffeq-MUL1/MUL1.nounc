@@ -1,0 +1,45 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;	DiffEq Solver MUL1 control
+;;
+;;	Original spec by Vida Vakilotojar
+;;	Modified by Kenneth Yun (Apr 24, 1996)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+input	EvDone	1
+input	A2M	0	; message from ALU2 control
+;;			;   + means X < a eval done
+;;			;   - means reset
+;;			;   handshakes with M2A2/M1A (A2M = REQ; M2A2/M1A = ACK)
+input	A1M	0	; message from ALU1 control
+;;			;   + means U updated with U - M1
+;;			;   - means A updated with Y + M1
+;;			;   handshakes with M1A/M2A2 (A1M = REQ; M1A/M2A2 = ACK)
+
+output	Prech	1
+output	M1A	0	; message to ALU1 control
+;;			;   + means M1 updated with U * X1
+;;			;   - means M1 updated with B * A
+;;			;   handshakes with A1M/A2M (A1M/A2M = REQ; M1A = ACK)
+output	LM1	1	; load M1
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    When precharging complete and U updated and X < a comparison done,
+;;	begin evaluating U * X1.
+;;    When U * X1 done by MUL1,
+;;	store U * X1 in M1;
+;;	switch inputs to B and A;
+;;	send message to ALU1 control;
+;;	begin precharging MUL1.
+;;    When precharging complete,
+;;	begin evaluating B * A.
+;;    When B * A eval done,
+;;	store B * A in M1;
+;;	switch inputs to U and X1;
+;;	send message to ALU1 control;
+;;	begin precharging MUL1.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+0 1	EvDone-	A2M+ A1M+	| Prech- LM1-
+1 2	EvDone+			| Prech+ M1A+ LM1+
+2 3	EvDone- A2M* A1M-	| Prech- LM1-
+3 0	EvDone+	A2M-		| Prech+ M1A- LM1+

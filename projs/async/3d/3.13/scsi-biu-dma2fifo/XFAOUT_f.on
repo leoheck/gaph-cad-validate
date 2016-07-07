@@ -1,0 +1,13 @@
+.i    9
+.o    1
+.ilb  ok cntgt1 frin dackn dreq faout zzz00 zzz01 zzz02
+.ob   faout
+.type fr
+.p    6
+1-0101110 1
+0-0101000 1
+1-110--10 0
+--110--00 0
+1--101000 0
+--1101000 0
+.e

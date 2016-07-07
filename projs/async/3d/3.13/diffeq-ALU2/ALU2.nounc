@@ -1,0 +1,96 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;	DiffEq Solver ALU2 control
+;;
+;;	Original spec by Vida Vakilotojar
+;;	Modified by Kenneth Yun (Apr 24, 1996)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+input	start	0
+input	EvDone	0	; ALU2 evaluation done
+input	M1A	0	; message from MUL1 control
+;;			;   + means M1 updated with U * X1
+;;			;   - means M1 updated with B * A
+;;			;   handshakes with A2M (A2M = REQ; M1A = ACK)
+input	M2A2	0	; message from MUL2 control
+;;			;   + means M2 updated with U * dx
+;;			;   - means reset
+;;			;   handshakes with A2M (A2M = REQ; M2A2 = ACK)
+input	C	0	; X < a flag
+
+output	Prech	1	; start precharging at power-up
+output	LX	0	; load X
+output	LY	0	; load Y / X1
+output	A2M	0	; broadcast message to MUL1 and MUL2 controls
+;;			;   + means start iteration 
+;;			;   - means reset
+output	EndP	0
+output	seldx	0
+;;			;   0 means select a
+;;			;   1 means select dx
+output	selym2	0
+;;			;   0 means select X and dx / a
+;;			;   1 means select Y and M2
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Start2Iterate:
+;;    When prompted to start,
+;;	begin evaluating X < a.
+;;    If X < a when comparison done,
+;;	broadcast message to MUL1 and MUL2 controls;
+;;	begin precharging ALU2.
+;;    When precharging complete,
+;;	begin evaluating X + dx.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ 0  1		start+			| Prech-
+ 1  2	[C-]	EvDone+			| Prech+ A2M+ seldx+
+ 2  3		EvDone- M1A* M2A2*	| Prech-
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Iterate:
+;;    When X + dx eval done,
+;;	store X + dx in X;
+;;	begin precharging ALU2.
+;;    When precharging complete and U * X1 and U * dx done by MUL1 and MUL2,
+;;	begin evaluating X < a.
+;;    If X < a when comparison done,
+;;	begin precharging ALU2.
+;;    When precharging complete,
+;;	begin evaluating Y + M2.
+;;    When Y + M2 eval done and B * A done by MUL1,
+;;	store Y + M2 in Y and new X in X1;
+;;	begin precharging ALU2.
+;;	<Note>
+;;	  By the time B * A done by MUL1,
+;;	    U * X1 stored in M1 and Y + M1 stored in A.
+;;    When precharging complete,
+;;	begin evaluating X + dx.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ 3  4		EvDone+ M1A* M2A2*	| Prech+ LX+ seldx-
+ 4  5		EvDone- M1A+ M2A2+	| Prech- A2M-
+ 5  6	[C-]	EvDone+	M1A* M2A2*	| Prech+ seldx+ selym2+
+ 6  7 		EvDone-	M1A* M2A2*	| Prech- LX-
+ 7  8		EvDone+	M1A- M2A2-	| Prech+ LY+ A2M+ selym2-
+ 8  3		EvDone- M1A* M2A2*	| Prech- LY-
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Iterate2Restart:
+;;    If X >= a when comparison done,
+;;	begin precharging ALU2.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ 5  9	[C+]	EvDone+	M1A* M2A2*	| Prech+ selym2+
+ 9 10		EvDone- M1A* M2A2*	| Prech- LX-
+10 11		EvDone+ M1A- M2A2-	| Prech+ LY+ selym2-
+11 13		EvDone-			| LY- EndP+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;  Start2Restart:
+;;    If X >= a when comparison done,
+;;	begin precharging ALU2.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+ 1 12	[C+]	EvDone+			| Prech+
+12 13		EvDone-			| EndP+
+13  0		start-			| EndP-

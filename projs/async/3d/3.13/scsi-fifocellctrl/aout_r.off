@@ -1,0 +1,11 @@
+.i 5
+.o 1
+.ilb rin ain rout aout zzz00
+.ob aout
+.p 0
+--100 0
+-1-0- 0
+0-001 0
+-1001 0
+00--0 0
+.e

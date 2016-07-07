@@ -1,0 +1,21 @@
+Input Count   = 4
+Output Count  = 2
+Initial State = 0-0100
+
+* State Table *
+(0)	0-0100	[A]	   1
+(1)	1--110	[A]	   2   5
+(2)	1--000	[B]	   3
+(3)	1-1101	[C]	   4
+(4)	1-0110	[C]	   2   5
+(5)	1--000	[D]	   6
+(6)	--1101	[E]	   0
+
+* State Transition / Conflict Table *
+(1-2)	11-010	[A-B]*	C-D  
+(1-5)	10-010	[A-D]*	C-B  
+(2-3)	1-110-	[B-C]	A    D-E  
+(4-2)	11-010	[C-B]*	A-D  
+(4-5)	10-010	[C-D]*	A-B  
+(5-6)	--110-	[D-E]	A    B-C  
+(6-0)	0-010-	[E-A]	D    

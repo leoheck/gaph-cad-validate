@@ -1,0 +1,119 @@
+****************************************************************
+* 3D Synthesis System Version 3.13 June 13, 1999               *
+* Copyright (C) 1992-93 by Kenneth Y. Yun, Stanford University *
+*               1994-99 by Kenneth Y. Yun, UC San Diego        *
+* All rights reserved                                          *
+****************************************************************
+
+3D> stateassign fifocellctrl.nounc fifocellctrl.sym
+
+3D> stateencode fifocellctrl.sym fifocellctrl.enc
+
+3D> backannotate fifocellctrl
+
+3D> logicgen fifocellctrl.unc fifocellctrl.out
+
+3D> formatout fifocellctrl.out
+
+3D> formattrans fifocellctrl.out
+
+3D> HFMIN -L rout rout
+Merging output PLA files...
+HFMIN> merge-PLAs-II XROUT rout
+PLA 'rout.on' claims to have 0 product terms.
+PLA 'rout.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XROUT.on > XROUT.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XROUT.on XROUT.trans XROUT.pi > XROUT.sol
+Finished minimizing; results should appear in 'XROUT.sol'.
+
+3D> HFMIN -L rout_r rout_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XROUT_r rout_r
+PLA 'rout_r.on' claims to have 0 product terms.
+PLA 'rout_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XROUT_r.on > XROUT_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XROUT_r.on XROUT_r.trans XROUT_r.pi > XROUT_r.sol
+Finished minimizing; results should appear in 'XROUT_r.sol'.
+
+3D> HFMIN -L rout_f rout_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XROUT_f rout_f
+PLA 'rout_f.on' claims to have 0 product terms.
+PLA 'rout_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XROUT_f.on > XROUT_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XROUT_f.on XROUT_f.trans XROUT_f.pi > XROUT_f.sol
+Finished minimizing; results should appear in 'XROUT_f.sol'.
+
+3D> HFMIN -L aout aout
+Merging output PLA files...
+HFMIN> merge-PLAs-II XAOUT aout
+PLA 'aout.on' claims to have 0 product terms.
+PLA 'aout.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XAOUT.on > XAOUT.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XAOUT.on XAOUT.trans XAOUT.pi > XAOUT.sol
+Finished minimizing; results should appear in 'XAOUT.sol'.
+
+3D> HFMIN -L aout_r aout_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XAOUT_r aout_r
+PLA 'aout_r.on' claims to have 0 product terms.
+PLA 'aout_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XAOUT_r.on > XAOUT_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XAOUT_r.on XAOUT_r.trans XAOUT_r.pi > XAOUT_r.sol
+Finished minimizing; results should appear in 'XAOUT_r.sol'.
+
+3D> HFMIN -L aout_f aout_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XAOUT_f aout_f
+PLA 'aout_f.on' claims to have 0 product terms.
+PLA 'aout_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XAOUT_f.on > XAOUT_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XAOUT_f.on XAOUT_f.trans XAOUT_f.pi > XAOUT_f.sol
+Finished minimizing; results should appear in 'XAOUT_f.sol'.
+
+3D> HFMIN -L zzz00 zzz00
+Merging output PLA files...
+HFMIN> merge-PLAs-II XZZZ00 zzz00
+PLA 'zzz00.on' claims to have 0 product terms.
+PLA 'zzz00.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XZZZ00.on > XZZZ00.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XZZZ00.on XZZZ00.trans XZZZ00.pi > XZZZ00.sol
+Finished minimizing; results should appear in 'XZZZ00.sol'.
+
+3D> HFMIN -L zzz00_r zzz00_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XZZZ00_r zzz00_r
+PLA 'zzz00_r.on' claims to have 0 product terms.
+PLA 'zzz00_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XZZZ00_r.on > XZZZ00_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XZZZ00_r.on XZZZ00_r.trans XZZZ00_r.pi > XZZZ00_r.sol
+Finished minimizing; results should appear in 'XZZZ00_r.sol'.
+
+3D> HFMIN -L zzz00_f zzz00_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XZZZ00_f zzz00_f
+PLA 'zzz00_f.on' claims to have 0 product terms.
+PLA 'zzz00_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XZZZ00_f.on > XZZZ00_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XZZZ00_f.on XZZZ00_f.trans XZZZ00_f.pi > XZZZ00_f.sol
+Finished minimizing; results should appear in 'XZZZ00_f.sol'.
+
+3D> logiceqn fifocellctrl fifocellctrl.eqn

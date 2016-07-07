@@ -1,0 +1,8 @@
+****************************************************************
+* 3D Synthesis System Version 3.13 June 13, 1999               *
+* Copyright (C) 1992-93 by Kenneth Y. Yun, Stanford University *
+*               1994-99 by Kenneth Y. Yun, UC San Diego        *
+* All rights reserved                                          *
+****************************************************************
+
+3D> stateassign scsi-init-send.nounc scsi-init-send.sym

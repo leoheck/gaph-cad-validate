@@ -1,0 +1,119 @@
+****************************************************************
+* 3D Synthesis System Version 3.13 June 13, 1999               *
+* Copyright (C) 1992-93 by Kenneth Y. Yun, Stanford University *
+*               1994-99 by Kenneth Y. Yun, UC San Diego        *
+* All rights reserved                                          *
+****************************************************************
+
+3D> stateassign MUL2.nounc MUL2.sym
+
+3D> stateencode MUL2.sym MUL2.enc
+
+3D> backannotate MUL2
+
+3D> logicgen MUL2.unc MUL2.out
+
+3D> formatout MUL2.out
+
+3D> formattrans MUL2.out
+
+3D> HFMIN -L Prech Prech
+Merging output PLA files...
+HFMIN> merge-PLAs-II XPRECH Prech
+PLA 'Prech.on' claims to have 0 product terms.
+PLA 'Prech.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XPRECH.on > XPRECH.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XPRECH.on XPRECH.trans XPRECH.pi > XPRECH.sol
+Finished minimizing; results should appear in 'XPRECH.sol'.
+
+3D> HFMIN -L Prech_r Prech_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XPRECH_r Prech_r
+PLA 'Prech_r.on' claims to have 0 product terms.
+PLA 'Prech_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XPRECH_r.on > XPRECH_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XPRECH_r.on XPRECH_r.trans XPRECH_r.pi > XPRECH_r.sol
+Finished minimizing; results should appear in 'XPRECH_r.sol'.
+
+3D> HFMIN -L Prech_f Prech_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XPRECH_f Prech_f
+PLA 'Prech_f.on' claims to have 0 product terms.
+PLA 'Prech_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XPRECH_f.on > XPRECH_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XPRECH_f.on XPRECH_f.trans XPRECH_f.pi > XPRECH_f.sol
+Finished minimizing; results should appear in 'XPRECH_f.sol'.
+
+3D> HFMIN -L M2A2 M2A2
+Merging output PLA files...
+HFMIN> merge-PLAs-II XM2A2 M2A2
+PLA 'M2A2.on' claims to have 0 product terms.
+PLA 'M2A2.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XM2A2.on > XM2A2.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XM2A2.on XM2A2.trans XM2A2.pi > XM2A2.sol
+Finished minimizing; results should appear in 'XM2A2.sol'.
+
+3D> HFMIN -L M2A2_r M2A2_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XM2A2_r M2A2_r
+PLA 'M2A2_r.on' claims to have 0 product terms.
+PLA 'M2A2_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XM2A2_r.on > XM2A2_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XM2A2_r.on XM2A2_r.trans XM2A2_r.pi > XM2A2_r.sol
+Finished minimizing; results should appear in 'XM2A2_r.sol'.
+
+3D> HFMIN -L M2A2_f M2A2_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XM2A2_f M2A2_f
+PLA 'M2A2_f.on' claims to have 0 product terms.
+PLA 'M2A2_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XM2A2_f.on > XM2A2_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XM2A2_f.on XM2A2_f.trans XM2A2_f.pi > XM2A2_f.sol
+Finished minimizing; results should appear in 'XM2A2_f.sol'.
+
+3D> HFMIN -L LM2 LM2
+Merging output PLA files...
+HFMIN> merge-PLAs-II XLM2 LM2
+PLA 'LM2.on' claims to have 0 product terms.
+PLA 'LM2.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XLM2.on > XLM2.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XLM2.on XLM2.trans XLM2.pi > XLM2.sol
+Finished minimizing; results should appear in 'XLM2.sol'.
+
+3D> HFMIN -L LM2_r LM2_r
+Merging output PLA files...
+HFMIN> merge-PLAs-II XLM2_r LM2_r
+PLA 'LM2_r.on' claims to have 0 product terms.
+PLA 'LM2_r.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XLM2_r.on > XLM2_r.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XLM2_r.on XLM2_r.trans XLM2_r.pi > XLM2_r.sol
+Finished minimizing; results should appear in 'XLM2_r.sol'.
+
+3D> HFMIN -L LM2_f LM2_f
+Merging output PLA files...
+HFMIN> merge-PLAs-II XLM2_f LM2_f
+PLA 'LM2_f.on' claims to have 0 product terms.
+PLA 'LM2_f.off' claims to have 0 product terms.
+Generating primes with espresso...
+HFMIN> espresso -Dprimes XLM2_f.on > XLM2_f.pi
+Minimizing logic with hfmin...
+HFMIN> hfmin -l -P XLM2_f.on XLM2_f.trans XLM2_f.pi > XLM2_f.sol
+Finished minimizing; results should appear in 'XLM2_f.sol'.
+
+3D> logiceqn MUL2 MUL2.eqn

@@ -1,0 +1,13 @@
+.i    7
+.o    1
+.ilb  EvDone A2M A1M Prech M1A LM1 zzz00
+.ob   zzz00
+.type fr
+.p    6
+0-01111 1
+011-0-- 0
+-110001 0
+111---1 0
+1--1111 0
+--11111 0
+.e

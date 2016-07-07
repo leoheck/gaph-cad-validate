@@ -1,0 +1,27 @@
+Prech =
+  A1M M1A +
+  A2M' M1A' +
+  A1M' M1A' +
+  EvDone LM1 +
+  EvDone zzz00 +
+  EvDone A2M' zzz00' 
+
+M1A =
+  EvDone' M1A +
+  A2M M1A +
+  EvDone zzz00 +
+  M1A zzz00 
+
+LM1 =
+  A1M M1A +
+  A2M' M1A' +
+  A1M' M1A' +
+  EvDone LM1 +
+  EvDone zzz00 +
+  EvDone A2M' zzz00' 
+
+zzz00 =
+  EvDone zzz00 +
+  A1M zzz00 +
+  EvDone' A2M A1M M1A' 
+

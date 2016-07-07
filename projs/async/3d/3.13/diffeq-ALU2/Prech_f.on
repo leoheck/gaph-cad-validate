@@ -1,0 +1,12 @@
+.i 15
+.o 1
+.ilb start EvDone M1A M2A2 C Prech LX LY A2M EndP seldx selym2 zzz00 zzz01 zzz02
+.ob Prech
+.p 0
+1000-1000000000 1
+10---1001010011 1
+1011-1101000000 1
+10---1100011011 1
+10---1011010110 1
+10---1100001110 1
+.e

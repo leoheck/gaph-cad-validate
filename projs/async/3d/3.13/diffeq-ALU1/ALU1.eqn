@@ -1,0 +1,34 @@
+Prech =
+  start' +
+  EvDone +
+  M1A' A1M +
+  M1A A1M' 
+
+LB =
+  EvDone +
+  start LB 
+
+LA =
+  EvDone' LA +
+  EvDone zzz01 +
+  A1M' zzz01 
+
+LU =
+  EvDone zzz00 +
+  start M1A' LU 
+
+A1M =
+  EvDone zzz01' +
+  EvDone' M1A A1M +
+  start A1M zzz01' 
+
+zzz00 =
+  EvDone zzz00 +
+  EvDone' M1A' LA +
+  start M1A' zzz00 
+
+zzz01 =
+  EvDone zzz01 +
+  M1A zzz01 +
+  EvDone' M1A A1M 
+

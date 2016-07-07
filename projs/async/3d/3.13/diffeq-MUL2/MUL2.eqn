@@ -1,0 +1,16 @@
+Prech =
+  EvDone +
+  A2M' +
+  LM2 +
+  A1M' Prech 
+
+M2A2 =
+  EvDone +
+  A2M LM2 +
+  A1M LM2 
+
+LM2 =
+  EvDone +
+  A2M LM2 +
+  A1M LM2 
+

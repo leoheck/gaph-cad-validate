@@ -1,0 +1,11 @@
+rout =
+  ain' rout +
+  rin' ain' zzz00' 
+
+aout =
+  rin ain' rout' 
+
+zzz00 =
+  ain +
+  rin' zzz00 
+

@@ -1,0 +1,12 @@
+Input Count   = 2
+Output Count  = 2
+Initial State = 0010
+
+* State Table *
+(0)	0010	[A]	   1
+(1)	-100	[B]	   2
+(2)	1001	[A]	   0
+
+* State Transition / Conflict Table *
+(0-1)	-1-0	[A-B]	
+(1-2)	100-	[B-A]	

@@ -1,0 +1,8 @@
+Input Count   = 3
+Output Count  = 3
+Initial State = 000100
+
+* State Table *
+(0)	000100	[A]	   1
+(1)	011000	[A]	   2
+(2)	11-111	[A]	   0
