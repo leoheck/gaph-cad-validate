@@ -112,6 +112,7 @@ main()
 
 validade_all()
 {
+	echo "TODO :)"
 }
 
 clear
@@ -120,11 +121,11 @@ main
 clear
 
 case $choice in
-	1 ) validade_all() ;;
-	2 ) validade_all() ;;
-	3 ) validade_all() ;;
-	4 ) validade_all() ;;
+	1 ) validade_all ;;
+	2 ) validade_all ;;
+	3 ) validade_all ;;
+	4 ) validade_all ;;
 esac
 
-echo "${YELLOW}  DONE! Bye :) ${NORMAL}"
-echo
+# echo "${YELLOW}  DONE! Bye :) ${NORMAL}"
+# echo

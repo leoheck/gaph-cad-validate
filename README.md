@@ -14,7 +14,7 @@ projetos simples que devem ser executadas de forma automatizada.
 # Execução
 
 ```bash
-sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/leoheck/gaph-cad-validade/master/runall.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/leoheck/gaph-cad-validate/master/runall.sh)"
 ```
 
 # Progresso
