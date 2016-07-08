@@ -4,5 +4,4 @@
 *               1994-99 by Kenneth Y. Yun, UC San Diego        *
 * All rights reserved                                          *
 ****************************************************************
-
-3D> stateassign scsi-init-send.nounc scsi-init-send.sym
+Usage: 3D [-f] SPEC[.nounc]

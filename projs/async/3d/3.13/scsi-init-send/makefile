@@ -5,7 +5,10 @@ eqn = $(src:.nounc=.eqn)
 all: $(eqn)
 
 %.eqn: %.nounc
-	@ 3D $^ | tee $(^:.nounc=.log)
+	@ echo "============================"
+	@ echo "3D $^"
+	@ 3D $^
+	# 2>&1 /dev/null | tee $(^:.nounc=.log)
 
 clean:
 	@ rm -rf *.eqn

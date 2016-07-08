@@ -2,6 +2,8 @@
 
 # Leandro Sehnem Heck (leoheck@gmail.com)
 
+# http://www.tldp.org/LDP/abs/html/io-redirection.html
+
 # GITHUB REPOSITORY CONFIG
 REPO="gaph-cad-validate"
 BRANCH="master"
@@ -62,7 +64,7 @@ umask g-w,o-w
 
 main()
 {
-	echo
+	# echo
 
 	# if [ -f /tmp/$PKG ]; then
 	# 	printf "%s  Removing preview /tmp/$PKG ...%s\n" "${BLUE}" "${NORMAL}"
@@ -82,40 +84,86 @@ main()
 
 	echo "${GREEN}"
 	echo "   _____  _____  _____  _____           _____  _____  ____  "
-	echo "  |   __||  _  ||  _  ||  |  |   ___   |   _ ||  _  ||    \ "
-	echo "  |  |  ||     ||   __||     |  |___|  |  |_  |     || |  | "
-	echo "  |_____||__|__||__|   |__|__|         |_____||__|__||____/ "
+	echo "  |   __||  _  ||  _  ||  |  |   ___   |     ||  _  ||    \ "
+	echo "  |  |  ||     ||   __||     |  |___|  |   --||     ||  |  |"
+	echo "  |_____||__|__||__|  ||__|__|         |_____||__|__||____/ "
 	echo "                                                            "
 	echo "  VALIDATION SCRIPT (MADE FOR UBUNTU 16.04)${NORMAL}"
 	echo
-	echo "  [1] ${BOLD}RUN ALL${NORMAL}"
-	echo "  [2] Validade Async Tools"
-	echo "  [ ] ... todo: add sections/tools here ..."
+	echo "   [1] ${BOLD}RUN ALL${NORMAL}"
+	echo "   [2] Evaluate altera"
+	echo "   [3] Evaluate async"
+	echo "   [4] Evaluate cadence"
+	echo "   [5] Evaluate design-kits"
+	echo "   [6] Evaluate imperas"
+	echo "   [7] Evaluate mentor"
+	echo "   [8] Evaluate others"
+	echo "   [9] Evaluate sesd"
+	echo "  [10] Evaluate synopsys"
+	echo "  [11] Evaluate xilinx"
 	echo
 	echo "${BLUE}  Hit CTRL+C to exit${NORMAL}"
 	echo
 
-	# while :;
-	# do
-	#   read -p '  #> ' choice
-	#   case $choice in
-	# 	1 ) break ;;
-	# 	2 ) break ;;
-	# 	3 ) break ;;
-	# 	4 ) break ;;
-	# 	* )
-	# 		tput cuu1
-	# 		tput el1
-	# 		tput el
-	# 		;;
-	#   esac
-	# done
+	while :;
+	do
+	  read -p '  #> ' choice
+	  case $choice in
+		[1-9]) break ;;
+		 10) break ;;
+		 11) break ;;
+		 *)
+			tput cuu1
+			tput el1
+			tput el
+			;;
+	  esac
+	done
 }
 
+header()
+{
+	echo "  - ${YELLOW}${1}${NORMAL}"
+}
+
+evaluate()
+{
+	DIR=$1
+	bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
+
+	# TESTA SE TEM DISPLAY
+	# xhost +si:localuser:$(whoami) >&/dev/null && {
+	# 	# echo "${BLUE} Loading the GUI, please wait...${NORMAL}"
+	# 	xterm \
+	# 		-title 'Installing BASE Software' \
+	# 		-fa 'Ubuntu Mono' -fs 12 \
+	# 		-bg 'black' -fg 'white' \
+	# 		-e "source $DIR/setup-env.sh; make -s -C $DIR"
+	# 	# tput cuu1
+	# 	# tput el
+	# } || {
+	# 	bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
+	# }
+
+	STATUS=$?
+	if [ "$STATUS" == "0" ]; then
+		echo "${GREEN}DONE${NORMAL}"
+	else
+		echo "${RED}Error $STATUS${NORMAL}"
+	fi
+}
+
+validade_altera()
+{
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
+}
 
 validade_async()
 {
-	echo "${YELLOW}Running Tests in ASYNC Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
+
 	PROJS=$(find projs -name "makefile")
 
 	for PROJ in $PROJS
@@ -123,21 +171,9 @@ validade_async()
 		DIR=$(dirname $PROJ)
 		PROJ=$(basename $DIR)
 
-		echo -ne "  - $PROJ "
+		echo -ne "    - $PROJ "
 
-		# TESTA SE TEM DISPLAY
-		xhost +si:localuser:$(whoami) >&/dev/null && {
-			# echo "${BLUE} Loading the GUI, please wait...${NORMAL}"
-			xterm \
-				-title 'Installing BASE Software' \
-				-fa 'Ubuntu Mono' -fs 12 \
-				-bg 'black' -fg 'white' \
-				-e "source $DIR/setup-env.sh; make -s -C $DIR"
-			# tput cuu1
-			# tput el
-		} || {
-			bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
-		}
+		bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
 
 		STATUS=$?
 		if [ "$STATUS" == "0" ]; then
@@ -149,59 +185,78 @@ validade_async()
 	done
 }
 
-
 validade_cadence()
 {
-	echo "${YELLOW}Running Tests in Cadence Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
 }
 
-validade_synopsys()
+validade_imperas()
 {
-	echo "${YELLOW}Running Tests in Synopsys Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
 }
 
 validade_mentor()
 {
-	echo "${YELLOW}Running Tests in Mentor Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
 }
 
-validade_altera()
+validade_others()
 {
-	echo "${YELLOW}Running Tests in Altera Tools${NORMAL}"
-}
-
-validade_xilinx()
-{
-	echo "${YELLOW}Running Tests in Xlinx Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
 }
 
 validade_sesd()
 {
-	echo "${YELLOW}Running Tests in SESD Tools${NORMAL}"
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
 }
 
-#  add all sections here...
+validade_synopsys()
+{
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
+}
+
+validade_xilinx()
+{
+	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
+	header "Running Tests in $COMPANY Tools"
+}
 
 validade_all()
 {
 	validade_altera
 	validade_async
 	validade_cadence
+	validade_imperas
 	validade_mentor
+	validade_others
 	validade_sesd
 	validade_synopsys
 	validade_xilinx
 }
 
-# clear
+clear
 echo
 main
-# clear
+clear
+echo
 
 # TODO: Update the selector
 case $choice in
-	1 ) validade_all ;;
-	2 ) validade_async ;;
+	 1) validade_all ;;
+	 2) validade_altera ;;
+	 3) validade_async ;;
+	 4) validade_cadence ;;
+	 5) validade_design-kits ;;
+	 6) validade_imperas ;;
+	 7) validade_mentor ;;
+	 8) validade_others ;;
+	 9) validade_sesd ;;
+	10) validade_synopsys ;;
+	11) validade_xilinx ;;
 esac
-
-validade_all
