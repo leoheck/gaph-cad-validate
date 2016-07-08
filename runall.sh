@@ -4,6 +4,8 @@
 
 # http://www.tldp.org/LDP/abs/html/io-redirection.html
 
+ERROR_MODULE_NOT_FOUND=200
+
 # GITHUB REPOSITORY CONFIG
 REPO="gaph-cad-validate"
 BRANCH="master"
@@ -123,13 +125,18 @@ main()
 
 header()
 {
-	echo "  - ${YELLOW}${1}${NORMAL}"
+	echo "  - Evaluating ${YELLOW}${1}${NORMAL}"
 }
 
 evaluate()
 {
 	DIR=$1
-	bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
+
+	bash -e -c "source $DIR/setup-env.sh; make -s -C $DIR"
+	# bash -e -c "make -s -C $DIR"
+
+	# source $DIR/setup-env.sh 1>&- 2>&-  &
+	# make -s -C $DIR
 
 	# TESTA SE TEM DISPLAY
 	# xhost +si:localuser:$(whoami) >&/dev/null && {
@@ -145,24 +152,34 @@ evaluate()
 	# 	bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
 	# }
 
+	# STATUS=$ERROR_MODULE_NOT_FOUND
+	# echo $STATUS
+
 	STATUS=$?
-	if [ "$STATUS" == "0" ]; then
-		echo "${GREEN}DONE${NORMAL}"
-	else
-		echo "${RED}Error $STATUS${NORMAL}"
-	fi
+
+	case $STATUS in
+		0)
+			echo "${GREEN}: DONE (status=${STATUS})${NORMAL}"
+			;;
+		$ERROR_MODULE_NOT_FOUND)
+			echo "${BLUE}: Module not found (status=${STATUS})${NORMAL}"
+			;;
+		*)
+			echo "${RED}: Error (status=${STATUS})${NORMAL}"
+			;;
+	esac
 }
 
 validade_altera()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_async()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 
 	PROJS=$(find projs -name "makefile")
 
@@ -173,14 +190,8 @@ validade_async()
 
 		echo -ne "    - $PROJ "
 
-		bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
-
-		STATUS=$?
-		if [ "$STATUS" == "0" ]; then
-			echo "${GREEN}DONE${NORMAL}"
-		else
-			echo "${RED}Error $STATUS${NORMAL}"
-		fi
+		# bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
+		evaluate "$DIR"
 
 	done
 }
@@ -188,43 +199,43 @@ validade_async()
 validade_cadence()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_imperas()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_mentor()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_others()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_sesd()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_synopsys()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_xilinx()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
-	header "Running Tests in $COMPANY Tools"
+	header $COMPANY
 }
 
 validade_all()
