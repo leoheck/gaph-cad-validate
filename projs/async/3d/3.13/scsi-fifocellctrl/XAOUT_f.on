@@ -1,9 +1,0 @@
-.i    5
-.o    1
-.ilb  rin ain rout aout zzz00
-.ob   aout
-.type fr
-.p    2
-00010 1
-100-- 0
-.e

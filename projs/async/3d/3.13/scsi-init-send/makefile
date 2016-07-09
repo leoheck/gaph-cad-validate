@@ -10,14 +10,14 @@ all: $(eqn)
 clean:
 	@ rm -rf *.eqn
 	@ rm -rf *.log
-	@ rm -f *.on
-	@ rm -f *.off
-	@ rm -f *.trans
-	@ rm -f *.pi
-	@ rm -f *.sym
-	@ rm -f *.enc
-	@ rm -f *.unc
-	@ rm -f *.sol
-	@ rm -f *.out.tr
-	@ rm -f *.out.priv
-	@ rm -f *.out
+	@ rm -rf *.on
+	@ rm -rf *.off
+	@ rm -rf *.trans
+	@ rm -rf *.pi
+	@ rm -rf *.sym
+	@ rm -rf *.enc
+	@ rm -rf *.unc
+	@ rm -rf *.sol
+	@ rm -rf *.out.tr
+	@ rm -rf *.out.priv
+	@ rm -rf *.out

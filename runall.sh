@@ -4,6 +4,9 @@
 
 # http://www.tldp.org/LDP/abs/html/io-redirection.html
 
+# Se a libc quebra... 
+# http://stackoverflow.com/questions/7085360/squelching-glibc-memory-corruption-stack-trace-output
+
 ERROR_MODULE_NOT_FOUND=200
 
 # GITHUB REPOSITORY CONFIG
@@ -103,6 +106,7 @@ main()
 	echo "   [9] Evaluate sesd"
 	echo "  [10] Evaluate synopsys"
 	echo "  [11] Evaluate xilinx"
+	echo "  [12] CLEAN ALL"
 	echo
 	echo "${BLUE}  Hit CTRL+C to exit${NORMAL}"
 	echo
@@ -114,6 +118,7 @@ main()
 		[1-9]) break ;;
 		 10) break ;;
 		 11) break ;;
+		 12) break ;;
 		 *)
 			tput cuu1
 			tput el1
@@ -170,6 +175,20 @@ evaluate()
 	esac
 }
 
+
+validade_all()
+{
+	validade_altera
+	validade_async
+	validade_cadence
+	validade_imperas
+	validade_mentor
+	validade_others
+	validade_sesd
+	validade_synopsys
+	validade_xilinx
+}
+
 validade_altera()
 {
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
@@ -181,18 +200,27 @@ validade_async()
 	COMPANY=$(echo ${FUNCNAME[0]} | sed 's/validade_//g')
 	header $COMPANY
 
-	PROJS=$(find projs -name "makefile")
+	TOOLS=$(find projs -mindepth 2 -maxdepth 2 -type d)
 
-	for PROJ in $PROJS
+	for TOOL in $TOOLS
 	do
-		DIR=$(dirname $PROJ)
-		PROJ=$(basename $DIR)
 
-		echo -ne "    - $PROJ "
+		TOOL_NAME=$(basename $TOOL)
+		echo "    - $TOOL_NAME "
 
-		# bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
-		evaluate "$DIR"
+		PROJS=$(find $TOOL -name "makefile")
 
+		for PROJ in $PROJS
+		do
+			DIR=$(dirname $PROJ)
+			PROJ=$(basename $DIR)
+
+			echo -ne "      - $PROJ "
+
+			# bash -c "source $DIR/setup-env.sh; make -s -C $DIR"
+			evaluate "$DIR"
+
+		done
 	done
 }
 
@@ -238,18 +266,20 @@ validade_xilinx()
 	header $COMPANY
 }
 
-validade_all()
+# GOOD TO COMMIT
+clean_all()
 {
-	validade_altera
-	validade_async
-	validade_cadence
-	validade_imperas
-	validade_mentor
-	validade_others
-	validade_sesd
-	validade_synopsys
-	validade_xilinx
+	echo "CLEANNING ALL PROJECTS"
+	TOOLS=$(find projs -name "makefile")
+
+	for TOOL in $TOOLS
+	do
+		echo $DIR
+		DIR=$(dirname $TOOL)
+		make clean -C $DIR
+	done
 }
+
 
 clear
 echo
@@ -270,4 +300,5 @@ case $choice in
 	 9) validade_sesd ;;
 	10) validade_synopsys ;;
 	11) validade_xilinx ;;
+	12) clean_all ;;
 esac
